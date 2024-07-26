@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data       // - generates getters, setters, toString(), equals(), hashCode(), and a constructor for all final fields.
 @AllArgsConstructor
 @NoArgsConstructor
 

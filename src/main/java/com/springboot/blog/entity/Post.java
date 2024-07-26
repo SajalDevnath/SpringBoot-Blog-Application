@@ -1,14 +1,13 @@
 package com.springboot.blog.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data // - generates getters, setters, toString(), equals(), hashCode(), and a constructor for all final fields.
+@Getter
+@Setter 
 @AllArgsConstructor // - automatically generates a constructor with parameters for all fields in the class.
 @NoArgsConstructor // - generates a no-argument constructor for a class in Java.
 
