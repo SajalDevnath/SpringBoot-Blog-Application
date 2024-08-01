@@ -2,6 +2,8 @@ package com.springboot.blog.config;
 
 import com.springboot.blog.security.JwtAuthenticationEntryPoint;
 import com.springboot.blog.security.JwtAuthenticationFilter;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +24,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration      // - Indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests for those beans at runtime.
 @EnableMethodSecurity       // - Enables Spring Security Method Security.
+@SecurityScheme(
+        name = "Bear Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+
+)
 public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
@@ -50,7 +59,11 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests((authorize) ->
 //                        authorize.anyRequest().authenticated())
-                        authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll().requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated())
+                        authorize.requestMatchers(HttpMethod.GET, "/api/**")
+                                .permitAll().requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
