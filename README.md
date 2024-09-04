@@ -59,7 +59,7 @@ This SpringBoot Blog Application is designed to provide a platform for users to 
 
 ### API Documentation
 - **SpringDoc:** Provides interactive API documentation for the application's REST APIs.
-
+  
 ## Installation
 
 1. Clone the repository:
